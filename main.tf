@@ -39,4 +39,5 @@ module "dns" {
   domains = var.domains
   ingress_id = module.cluster-resources.ingress_id
   loadbalancer_id = module.loadbalancer.loadbalancer_id
+  loadbalancer_ip = module.loadbalancer.loadbalancer_ip
 }
