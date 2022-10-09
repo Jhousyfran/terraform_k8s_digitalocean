@@ -18,7 +18,7 @@ resource "helm_release" "nginx_ingress_chart" {
 
 }
 
-resource "kubernetes_ingress" "tfcluster" {
+resource "kubernetes_ingress_v1" "tfcluster" {
   depends_on = [
     helm_release.nginx_ingress_chart,
   ]
@@ -39,8 +39,12 @@ resource "kubernetes_ingress" "tfcluster" {
         http {
           path {
             backend {
-              service_name = "${replace(rule.value, ".", "-")}-service"
-              service_port = 80
+              service {
+                name = "${replace(rule.value, ".", "-")}-service"
+                port {
+                  number = 80
+                }
+              }
             }
             path = "/"
           }
@@ -99,7 +103,7 @@ resource "kubernetes_deployment" "app_deployments" {
   }
 }
 
-resource "kubernetes_service" "app_services" {
+resource "kubernetes_service_v1" "app_services" {
   for_each = toset(var.domains)
   metadata {
     name      = "${replace(each.value, ".", "-")}-service"
