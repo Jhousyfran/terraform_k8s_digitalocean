@@ -1,5 +1,7 @@
 # Deploy Kubernetes na Digital Ocean (DNS + TLS)
-Este é um repositório de exemplo que usa o terraform para criar um cluster k8s da Digital Ocean, com entradas DNS e certificados TLS.
+Este é um repositório de exemplo que usa o terraform para criar um cluster k8s na Digital Ocean, com entradas DNS e certificados TLS.
+
+<img src="https://cdn.presslabs.com/wp-content/uploads/2018/12/do-kubernetes.png" align="center" width="600"/>
 
 ## Como usar
 * É necessário que tenha servidores de nomes apontados para a Digital Ocean.
