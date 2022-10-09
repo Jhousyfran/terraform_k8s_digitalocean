@@ -9,7 +9,7 @@ resource "digitalocean_record" "a_records" {
   type   = "A"
   ttl = 60
   name   = "@"
-  value  = var.loadbalancer_id
+  value  = var.loadbalancer_ip
   depends_on = [
     digitalocean_domain.domains,
     var.ingress_id
