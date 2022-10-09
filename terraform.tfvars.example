@@ -1,0 +1,8 @@
+cluster_name = "tfcluster"
+cluster_version = "1.24.4-do.0"
+default_node_size = "s-2vcpu-4gb"
+region = "nyc1"
+letsencrypt_email = "myemail@gmail.com"
+top_level_domains = [
+  "mydomain.com",
+]
