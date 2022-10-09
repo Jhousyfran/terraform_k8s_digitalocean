@@ -12,9 +12,13 @@ resource "helm_release" "nginx_ingress_chart" {
     value = var.loadbalancer_id
   }
 
+  depends_on = [
+    var.loadbalancer_id
+  ]
+
 }
 
-resource "kubernetes_ingress" "default_cluster_ingress" {
+resource "kubernetes_ingress" "tfcluster" {
   depends_on = [
     helm_release.nginx_ingress_chart,
   ]
