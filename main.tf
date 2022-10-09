@@ -19,7 +19,24 @@ module "cluster-resources" {
   cluster_name = var.cluster_name
   region = var.region
   domains = var.domains
-  letsencrypt_email = var.letsencrypt_email
   loadbalancer_id = module.loadbalancer.loadbalancer_id
+  cluster_endpoint = module.cluster-definition.cluster_endpoint
+  cluster_token = module.cluster-definition.cluster_token
+  cluster_ca_certificate = module.cluster-definition.cluster_ca_certificate
 }
 
+module "certificate" {
+  source = "./modules/certificate"
+  letsencrypt_email = var.letsencrypt_email
+  cluster_endpoint = module.cluster-definition.cluster_endpoint
+  cluster_token = module.cluster-definition.cluster_token
+  cluster_ca_certificate = module.cluster-definition.cluster_ca_certificate
+  ingress_id = module.cluster-resources.ingress_id
+}
+
+module "dns" {
+  source = "./modules/dns"
+  domains = var.domains
+  ingress_id = module.cluster-resources.ingress_id
+  loadbalancer_id = module.loadbalancer.loadbalancer_id
+}
